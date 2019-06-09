@@ -140,6 +140,58 @@ C  7) Run the program by typing
 C      a.out
 C
 C
+C--------------------------------------------------------------------
+C
+C  New version defines a subroutine as an interface for input parameters
+C  closed-loop plant-wide control scheme for 
+C  the Tennessee Eastman Process Control Test Problem
+C				
+C  The modifications are by:
+C
+C	      Gilberto M. Xavier
+C         e-mail: gilberto.xavier@lps.ufrj.br
+C         site: https://github.com/gmxavier/TEP-meets-LSTM
+C
+C		     Laboratório De Processamento De Sinais
+C	                Department of Chemical Engineering
+C		    Universidade Federal Do Rio De Janeiro
+C	                 Av. Horácio Macedo, 2030, Room H-220
+C			      CEP 21941-972 Rio De Janeiro, Brazil
+C		 	    http://brahms.scs.uiuc.edu
+C
+C This modified text is 
+C     Copyright (c) 2016 Guillaume Chevalier
+C     Copyright (c) 2018 Gilberto M. Xavier
+C All rights reserved.
+C 
+C The MIT License (MIT)
+C 
+C Permission is hereby granted, free of charge, to any person obtaining a copy
+C of this software and associated documentation files (the "Software"), to deal
+C in the Software without restriction, including without limitation the rights
+C to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+C copies of the Software, and to permit persons to whom the Software is
+C furnished to do so, subject to the following conditions:
+C 
+C The above copyright notice and this permission notice shall be included in all
+C copies or substantial portions of the Software.
+C 
+C THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+C IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+C FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+C AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+C LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+C OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+C SOFTWARE.
+
+C Users should cite this version using the following reference:
+*
+*     G.M. Xavier and J.M. Seixas, "Fault Detection and Diagnosis in a
+*     Chemical Process using Long Short-Term Memory Recurrent Neural Network".
+*     In Proceedings 31st International Joint Conference on Neural Networks (IJCNN),
+*     (Rio de Janeiro, Brazil), IEEE, IEEE, July 2018. 8 pages, to appear
+
+C
 C=============================================================================
 C
 C
