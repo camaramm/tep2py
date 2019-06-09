@@ -32,3 +32,29 @@ See [this](https://docs.scipy.org/doc/numpy/f2py/getting-started.html#the-smart-
     ```
     import temain_mod
     ```
+
+**Example**
+
+```python
+# modules
+import numpy as np 
+from tep2py import tep2py
+
+# matrix of disturbances
+idata = np.zeros((5,20))  
+
+# instantiate tep2py object for given `idata`
+tep = tep2py(idata)
+
+# run simulation
+tep.simulate()
+
+# retrieve simulated data as DataFrame
+print(tep.process_data)
+
+# retrieve table of disturbances
+print(tep.info_disturbance)
+
+# retrieve table of variables
+print(tep.info_variable)
+```
