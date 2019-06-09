@@ -140,8 +140,71 @@ C  7) Run the program by typing
 C      a.out
 C
 C
+C--------------------------------------------------------------------
+C
+C  New version defines a subroutine as an interface for input parameters
+C  closed-loop plant-wide control scheme for 
+C  the Tennessee Eastman Process Control Test Problem
+C				
+C  The modifications are by:
+C
+C	      Gilberto M. Xavier
+C         e-mail: gilberto.xavier@lps.ufrj.br
+C         site: https://github.com/gmxavier/TEP-meets-LSTM
+C
+C		     Laboratório De Processamento De Sinais
+C	                Department of Chemical Engineering
+C		    Universidade Federal Do Rio De Janeiro
+C	                 Av. Horácio Macedo, 2030, Room H-220
+C			      CEP 21941-972 Rio De Janeiro, Brazil
+C		 	    http://brahms.scs.uiuc.edu
+C
+C This modified text is 
+C     Copyright (c) 2016 Guillaume Chevalier
+C     Copyright (c) 2018 Gilberto M. Xavier
+C All rights reserved.
+C 
+C The MIT License (MIT)
+C 
+C Permission is hereby granted, free of charge, to any person obtaining a copy
+C of this software and associated documentation files (the "Software"), to deal
+C in the Software without restriction, including without limitation the rights
+C to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+C copies of the Software, and to permit persons to whom the Software is
+C furnished to do so, subject to the following conditions:
+C 
+C The above copyright notice and this permission notice shall be included in all
+C copies or substantial portions of the Software.
+C 
+C THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+C IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+C FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+C AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+C LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+C OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+C SOFTWARE.
+
+C Users should cite this version using the following reference:
+*
+*     G.M. Xavier and J.M. Seixas, "Fault Detection and Diagnosis in a
+*     Chemical Process using Long Short-Term Memory Recurrent Neural Network".
+*     In Proceedings 31st International Joint Conference on Neural Networks (IJCNN),
+*     (Rio de Janeiro, Brazil), IEEE, IEEE, July 2018. 8 pages, to appear
+
+C
 C=============================================================================
 C
+C
+      SUBROUTINE TEMAIN(NPTS, NX, IDATA, XDATA, VERBOSE)
+C ****************************************************************************
+*     COMPUTES THE 41 PROCESS MEASUREMENTS AND 11 MANIPULATED VARIABLES GIVEN
+*     THE DISTURBANCES TIME-SERIES MATRIX
+*     NPTS  = NUMBER OF DATA POINTS TO SIMULATE (1 MIN = 60 POINTS)
+*     NX    = NUMBER OF DATA POINTS COMPUTED (3 MIN = 1 POINT)
+*     IDATA = DISTURBANCES TIME-SERIES MATRIX (NX, 20)
+*     XDATA = PROCESS MEASUREMENTS AND MANIPULATED VARIABLES MATRIX (NX, 52)
+*     VERBOSE  = VERBOSE FLAG (0 = VERBOSE, 1 = NO VERBOSE)
+C ****************************************************************************
 C
 C  MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -206,8 +269,12 @@ C
 C  Local Variables
 C
       INTEGER I, NN, NPTS, TEST, TEST1, TEST3, TEST4
-C
       DOUBLE PRECISION TIME, YY(50), YP(50)
+C
+C  New local variables from subroutine
+C
+      INTEGER IDATA(NX, 20), K, VERBOSE
+      DOUBLE PRECISION XDATA(NX, 52)
 C
 C  Set the number of differential equations (states).  The process has 50
 C  states.  If the user wishes to integrate additional states, NN must be
@@ -215,26 +282,15 @@ C  increased by the number of additional differential equations.
 C
       NN = 50
 C
-C  Set the number of points to simulate
-C
-      NPTS = 172800
-
-C
-C  Set the number of pints to simulate in steady state operation
-C
-
-      SSPTS = 3600 * 8
-
-
-C
 C  Integrator Step Size:  1 Second Converted to Hours
 C
       DELTAT = 1. / 3600.
 C
 C  Initialize Process
-C  (Sets TIME to zero)
+C  (Sets TIME to zero and K to one)
 C
       CALL TEINIT(NN,TIME,YY,YP)
+      K = 1
 C
 C  Set Controller Parameters
 C  Make a Stripper Level Set Point Change of +15%
@@ -243,7 +299,7 @@ CC      SETPT = XMEAS(15) + 15.0
 CC      GAIN = 2.0
 CC      TAUI = 5.0
 CC      ERROLD = 0.0
-      SETPT(1)=3664.0        
+      SETPT(1)=3664.0
       GAIN1=1.0
       ERROLD1=0.0
       SETPT(2)=4509.3
@@ -256,80 +312,80 @@ CC      ERROLD = 0.0
       GAIN4=1.
       ERROLD4=0.0
       SETPT(5)=26.902
-      GAIN5=-0.083 	   
-      TAUI5=1./3600.   
+      GAIN5=-0.083
+      TAUI5=1./3600.
       ERROLD5=0.0
-      SETPT(6)=0.33712  
-      GAIN6=1.22        	       
+      SETPT(6)=0.33712
+      GAIN6=1.22
       ERROLD6=0.0
       SETPT(7)=50.0
-      GAIN7=-2.06      
+      GAIN7=-2.06
       ERROLD7=0.0
       SETPT(8)=50.0
-      GAIN8=-1.62      
+      GAIN8=-1.62
       ERROLD8=0.0
       SETPT(9)=230.31
-      GAIN9=0.41          
-      ERROLD9=0.0	
+      GAIN9=0.41
+      ERROLD9=0.0
       SETPT(10)=94.599
-      GAIN10= -0.156     * 10.
-      TAUI10=1452./3600. 
+      GAIN10= -0.156 * 10.
+      TAUI10=1452./3600.
       ERROLD10=0.0
-      SETPT(11)=22.949    
-      GAIN11=1.09	  
+      SETPT(11)=22.949
+      GAIN11=1.09
       TAUI11=2600./3600.
       ERROLD11=0.0
       SETPT(13)=32.188
-      GAIN13=18.              
-      TAUI13=3168./3600.   
+      GAIN13=18.
+      TAUI13=3168./3600.
       ERROLD13=0.0
       SETPT(14)=6.8820
-      GAIN14=8.3	  
+      GAIN14=8.3
       TAUI14=3168.0/3600.
       ERROLD14=0.0
-      SETPT(15)=18.776 	  		
-      GAIN15=2.37	  	
-      TAUI15=5069./3600.    
+      SETPT(15)=18.776
+      GAIN15=2.37
+      TAUI15=5069./3600.
       ERROLD15=0.0
       SETPT(16)=65.731
-      GAIN16=1.69	  / 10.
+      GAIN16=1.69 / 10.
       TAUI16=236./3600.
       ERROLD16=0.0
       SETPT(17)=75.000
-      GAIN17=11.1	/ 10.
-      TAUI17=3168./3600.  
-      ERROLD17=0.0	  
+      GAIN17=11.1 / 10.
+      TAUI17=3168./3600.
+      ERROLD17=0.0
       SETPT(18)=120.40
-      GAIN18=2.83	* 10.
+      GAIN18=2.83 * 10.
       TAUI18=982./3600.
       ERROLD18=0.0
       SETPT(19)=13.823
-      GAIN19=-83.2	  / 5. /3.  
-      TAUI19=6336./3600. 
+      GAIN19=-83.2 / 5. /3.
+      TAUI19=6336./3600.
       ERROLD19=0.0
-      SETPT(20)=0.83570  
-      GAIN20=-16.3	 / 5.	   
-      TAUI20=12408./3600.  
+      SETPT(20)=0.83570
+      GAIN20=-16.3 / 5.
+      TAUI20=12408./3600.
       ERROLD20=0.0
       SETPT(12)=2633.7
-      GAIN22=-1.0	  * 5.	   
-      TAUI22=1000./3600.  
+      GAIN22=-1.0 * 5.
+      TAUI22=1000./3600.
       ERROLD22=0.0
 C
 C    Example Disturbance:
 C    Change Reactor Cooling
 C
- 	XMV(1) = 63.053 + 0.
-	XMV(2) = 53.980 + 0.
-	XMV(3) = 24.644 + 0.    
-	XMV(4) = 61.302 + 0.
-	XMV(5) = 22.210 + 0.
-	XMV(6) = 40.064 + 0.
-	XMV(7) = 38.100 + 0.
-	XMV(8) = 46.534 + 0.
-	XMV(9) = 47.446 + 0.
-	XMV(10)= 41.106 + 0.
-	XMV(11)= 18.114 + 0.
+      XMV(1) = 63.053 + 0.
+      XMV(2) = 53.980 + 0.
+      XMV(3) = 24.644 + 0.
+      XMV(4) = 61.302 + 0.
+      XMV(5) = 22.210 + 0.
+      XMV(6) = 40.064 + 0.
+      XMV(7) = 38.100 + 0.
+      XMV(8) = 46.534 + 0.
+      XMV(9) = 47.446 + 0.
+      XMV(10)= 41.106 + 0.
+      XMV(11)= 18.114 + 0.
 C
 C	SETPT(6)=SETPT(6) + 0.2
 C
@@ -338,99 +394,61 @@ C
       DO 100 I = 1, 20
           IDV(I) = 0
  100  CONTINUE
-C      IDV(20)=1	
-C
-C
-C
-C
-	OPEN(UNIT=111,FILE='~/TE_data_inc.dat',STATUS='new')
-	OPEN(UNIT=1111,FILE='~/TE_data_mv1.dat',STATUS='new')
-	OPEN(UNIT=1112,FILE='~/TE_data_mv2.dat',STATUS='new')
-	OPEN(UNIT=1113,FILE='~/TE_data_mv3.dat',STATUS='new')
-	OPEN(UNIT=2111,FILE='~/TE_data_me01.dat',STATUS='new')
-	OPEN(UNIT=2112,FILE='~/TE_data_me02.dat',STATUS='new')
-	OPEN(UNIT=2113,FILE='~/TE_data_me03.dat',STATUS='new')
-	OPEN(UNIT=2114,FILE='~/TE_data_me04.dat',STATUS='new')
-	OPEN(UNIT=2115,FILE='~/TE_data_me05.dat',STATUS='new')
-	OPEN(UNIT=2116,FILE='~/TE_data_me06.dat',STATUS='new')
-	OPEN(UNIT=2117,FILE='~/TE_data_me07.dat',STATUS='new')
-	OPEN(UNIT=2118,FILE='~/TE_data_me08.dat',STATUS='new')
-	OPEN(UNIT=2119,FILE='~/TE_data_me09.dat',STATUS='new')
-	OPEN(UNIT=2120,FILE='~/TE_data_me10.dat',STATUS='new')
-	OPEN(UNIT=2121,FILE='~/TE_data_me11.dat',STATUS='new')
-C
 C
 C  Simulation Loop
 C
-        DO 1000 I = 1, NPTS
-         IF (I.GE.SSPTS) THEN
-                 IDV(12)=1
-          ENDIF
-	  TEST=MOD(I,3)
-	  IF (TEST.EQ.0) THEN
-		CALL CONTRL1
-	  	CALL CONTRL2
-	  	CALL CONTRL3
-	  	CALL CONTRL4
-	  	CALL CONTRL5
-	  	CALL CONTRL6
-	  	CALL CONTRL7
-	  	CALL CONTRL8
-	  	CALL CONTRL9
-	  	CALL CONTRL10
-	  	CALL CONTRL11
-	  	CALL CONTRL16
-	  	CALL CONTRL17
-	  	CALL CONTRL18
-	  ENDIF
+      DO 1000 I = 1, NPTS
+      TEST=MOD(I,3)
+      IF (TEST.EQ.0) THEN
+        CALL CONTRL1
+        CALL CONTRL2
+        CALL CONTRL3
+        CALL CONTRL4
+        CALL CONTRL5
+        CALL CONTRL6
+        CALL CONTRL7
+        CALL CONTRL8
+        CALL CONTRL9
+        CALL CONTRL10
+        CALL CONTRL11
+        CALL CONTRL16
+        CALL CONTRL17
+        CALL CONTRL18
+      ENDIF
           TEST1=MOD(I,360)
-	  IF (TEST1.EQ.0) THEN
-	  	CALL CONTRL13
-	  	CALL CONTRL14
-	  	CALL CONTRL15
-	  	CALL CONTRL19
-	  ENDIF
-	  TEST1=MOD(I,900)
-	  IF (TEST1.EQ.0) CALL CONTRL20
-	  TEST3=MOD(I,5000)       
-	  IF (TEST3.EQ.0) THEN
-		PRINT *, 'Simulation time (in seconds) = ', I
-	
-	ENDIF
+      IF (TEST1.EQ.0) THEN
+        CALL CONTRL13
+        CALL CONTRL14
+        CALL CONTRL15
+        CALL CONTRL19
+      ENDIF
+      TEST1=MOD(I,900)
+      IF (TEST1.EQ.0) CALL CONTRL20
+      IF (VERBOSE.EQ.1) THEN
+        TEST3=MOD(I,5000)
+        IF (TEST3.EQ.0) THEN
+          PRINT *, 'Simulation time (in seconds) = ', I, XMEAS(7)
+        ENDIF
+      ENDIF
 C
- 	TEST4=MOD(I,180)	
-	IF (TEST4.EQ.0) THEN
-		CALL OUTPUT
-      		WRITE(111,111) I
- 111  		FORMAT(1X,I6)
-     	ENDIF
+      TEST4=MOD(I,180)
+      IF (TEST4.EQ.0) THEN
+        IDV(:) = IDATA(K,:)
+        XDATA(K,1:41) = XMEAS(:)
+        XDATA(K,42:52) = XMV(1:11)
+        K = K + 1
+      ENDIF
 C
-	  CALL INTGTR(NN,TIME,DELTAT,YY,YP)
+      CALL INTGTR(NN,TIME,DELTAT,YY,YP)
 C
- 	  CALL CONSHAND
+      CALL CONSHAND
 C
  1000 CONTINUE
-		PRINT *, 'Simulation is done. '
-
+      IF (VERBOSE.EQ.1) THEN
+        PRINT *, 'Simulation is done.'
+      ENDIF
 C
- 	CLOSE(UNIT=111)
-	CLOSE(UNIT=1111)
-	CLOSE(UNIT=1112)
-	CLOSE(UNIT=1113)
-	CLOSE(UNIT=2111)
-	CLOSE(UNIT=2112)
-	CLOSE(UNIT=2113)
-	CLOSE(UNIT=2114)
-	CLOSE(UNIT=2115)
-	CLOSE(UNIT=2116)
-	CLOSE(UNIT=2117)
-	CLOSE(UNIT=2118)
-	CLOSE(UNIT=2119)
-	CLOSE(UNIT=2120)
-  	CLOSE(UNIT=2121)
-      STOP
-
-
+      RETURN
       END
 C
 C=============================================================================
@@ -475,8 +493,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL1
-C
-C  Discrete control algorithms
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR D FEED (STREAM 2)
+C **********************************************************************
 C
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
@@ -516,9 +535,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL2
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR E FEED (STREAM 3)
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -539,7 +558,7 @@ C    Stripper Level Controller
 C
 C    Calculate Error
 C
-      ERR2 = (SETPT(2) - XMEAS(3)) * 100. / 8354. 
+      ERR2 = (SETPT(2) - XMEAS(3)) * 100. / 8354.
 C
 C    Proportional-Integral Controller (Velocity Form)
 C         GAIN = Controller Gain
@@ -557,9 +576,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL3
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR A FEED (STREAM 1)
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -598,9 +617,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL4
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR A AND C FEED (STREAM 4)
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -639,9 +658,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL5
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR RECYCLE FLOW (STREAM 8)
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -671,9 +690,9 @@ C
 C 	PRINT *, 'GAIN5= ', GAIN5
 C	PRINT *, 'TAUI5= ', TAUI5
 C	PRINT *, 'ERR5= ', ERR5
-C	PRINT *, 'ERROLD5= ', ERROLD5     
+C	PRINT *, 'ERROLD5= ', ERROLD5
 C
-	DXMV = GAIN5 * ((ERR5 - ERROLD5)+ERR5*DELTAT*3./TAUI5)
+      DXMV = GAIN5 * ((ERR5 - ERROLD5)+ERR5*DELTAT*3./TAUI5)
 C
       XMV(5) = XMV(5) + DXMV
 C
@@ -685,16 +704,16 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL6
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR PROD SEP PRESSURE
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
       DOUBLE PRECISION XMEAS, XMV
       COMMON/PV/ XMEAS(41), XMV(12)
-	INTEGER FLAG
-       COMMON/FLAG6/ FLAG
+      INTEGER FLAG
+      COMMON/FLAG6/ FLAG
 C
 C   CONTROLLER COMMON BLOCK
 C
@@ -707,28 +726,28 @@ C
 C
 C  Example PI Controller:
 C     Stripper Level Controller
-	IF (XMEAS(13).GE.2950.0) THEN
-		XMV(6)=100.0
-		FLAG=1
-	ELSEIF (FLAG.EQ.1.AND.XMEAS(13).GE.2633.7) THEN
-		XMV(6)=100.0
-	ELSEIF (FLAG.EQ.1.AND.XMEAS(13).LE.2633.7) THEN
-		XMV(6)=40.060
-		SETPT(6)=0.33712
-		ERROLD6=0.0
- 		FLAG=0
-	ELSEIF (XMEAS(13).LE.2300.) THEN
-		XMV(6)=0.0
-		FLAG=2
-	ELSEIF (FLAG.EQ.2.AND.XMEAS(13).LE.2633.7) THEN
-		XMV(6)=0.0
-	ELSEIF (FLAG.EQ.2.AND.XMEAS(13).GE.2633.7) THEN
-		XMV(6)=40.060
-		SETPT(6)=0.33712
-		ERROLD6=0.0
-		FLAG=0
-	ELSE	
-		FLAG=0
+      IF (XMEAS(13).GE.2950.0) THEN
+        XMV(6)=100.0
+        FLAG=1
+      ELSEIF (FLAG.EQ.1.AND.XMEAS(13).GE.2633.7) THEN
+        XMV(6)=100.0
+      ELSEIF (FLAG.EQ.1.AND.XMEAS(13).LE.2633.7) THEN
+        XMV(6)=40.060
+        SETPT(6)=0.33712
+        ERROLD6=0.0
+        FLAG=0
+      ELSEIF (XMEAS(13).LE.2300.) THEN
+        XMV(6)=0.0
+        FLAG=2
+      ELSEIF (FLAG.EQ.2.AND.XMEAS(13).LE.2633.7) THEN
+        XMV(6)=0.0
+      ELSEIF (FLAG.EQ.2.AND.XMEAS(13).GE.2633.7) THEN
+        XMV(6)=40.060
+        SETPT(6)=0.33712
+        ERROLD6=0.0
+        FLAG=0
+      ELSE
+        FLAG=0
 C
 C    Calculate Error
 C
@@ -742,11 +761,11 @@ C	PRINT *, 'XMV(6)= ', XMV(6)
       DXMV = GAIN6 * ( ( ERR6 - ERROLD6 ) )
 C
 C 	PRINT *, 'GAIN6= ', GAIN6
-C	PRINT *, 'SETPT(6)= ', SETPT(6)	
-C	PRINT *, 'XMEAS(10)= ', XMEAS(10)     
-	XMV(6) = XMV(6) + DXMV
+C	PRINT *, 'SETPT(6)= ', SETPT(6)
+C	PRINT *, 'XMEAS(10)= ', XMEAS(10)
+      XMV(6) = XMV(6) + DXMV
 C
-C 	PRINT *, 'ERROLD6= ', ERROLD6     
+C 	PRINT *, 'ERROLD6= ', ERROLD6
 C	PRINT *, 'ERR6= ', ERR6
 C	PRINT *, 'XMV(6)== ', XMV(6)
       ERROLD6 = ERR6
@@ -758,9 +777,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL7
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR PRODUCT SEP LEVEL
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -799,9 +818,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL8
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR STRIPPER LEVEL
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -840,9 +859,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL9
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR STRIPPER STEAM FLOW
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -863,7 +882,7 @@ C    Stripper Level Controller
 C
 C    Calculate Error
 C
-      ERR9 = (SETPT(9) - XMEAS(19)) * 100. / 460. 
+      ERR9 = (SETPT(9) - XMEAS(19)) * 100. / 460.
 C
 C    Proportional-Integral Controller (Velocity Form)
 C         GAIN = Controller Gain
@@ -881,9 +900,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL10
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR REACTOR COOLING WATER OUTLET TEMP
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -922,9 +941,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL11
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR STRIPPER UNDERFLOW (STREAM 11)
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -963,9 +982,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL13
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR COMPONENT A (STREAM 6)
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -1004,9 +1023,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL14
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR COMPONENT D (STREAM 6)
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -1045,9 +1064,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL15
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR COMPONENT E (STREAM 6)
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -1086,9 +1105,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL16
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR STRIPPER TEMPERATURE
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -1127,9 +1146,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL17
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR REACTOR LEVEL
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -1168,9 +1187,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL18
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR REACTOR TEMPERATURE
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -1191,7 +1210,7 @@ C    Stripper Level Controller
 C
 C    Calculate Error
 C
-      ERR18 = (SETPT(18) - XMEAS(9)) * 100. / 150. 
+      ERR18 = (SETPT(18) - XMEAS(9)) * 100. / 150.
 C
 C    Proportional-Integral Controller (Velocity Form)
 C         GAIN = Controller Gain
@@ -1209,9 +1228,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL19
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR COMPONENT B (STREAM 9)
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -1252,9 +1271,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL20
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR COMPONENT E (STREAM 11)
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -1267,7 +1286,7 @@ C
       COMMON/CTRLALL/ SETPT(20), DELTAT
       DOUBLE PRECISION GAIN20, TAUI20, ERROLD20
       COMMON/CTRL20/  GAIN20, TAUI20, ERROLD20
-C    
+C
       DOUBLE PRECISION ERR20, DXMV
 C
 C  Example PI Controller:
@@ -1293,9 +1312,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL22
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR PROD SEP PRESSURE
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -1308,7 +1327,7 @@ C
       COMMON/CTRLALL/ SETPT(20), DELTAT
       DOUBLE PRECISION GAIN22, TAUI22, ERROLD22
       COMMON/CTRL22/  GAIN22, TAUI22, ERROLD22
-C    
+C
       DOUBLE PRECISION ERR22, DXMV
 C
 C  Example PI Controller:
@@ -1333,41 +1352,11 @@ C
 C
 C=============================================================================
 C
-      SUBROUTINE OUTPUT
-C
-C
-C   MEASUREMENT AND VALVE COMMON BLOCK
-C
-      DOUBLE PRECISION XMEAS, XMV
-      COMMON/PV/ XMEAS(41), XMV(12)
-C
-        WRITE(1111,100) XMV(1), XMV(2), XMV(3), XMV(4)
-      	WRITE(1112,100) XMV(5), XMV(6), XMV(7), XMV(8)
-      	WRITE(1113,100) XMV(9), XMV(10), XMV(11), XMV(12)
-      	WRITE(2111,100) XMEAS(1), XMEAS(2), XMEAS(3), XMEAS(4)
-      	WRITE(2112,100) XMEAS(5), XMEAS(6), XMEAS(7), XMEAS(8)
-      	WRITE(2113,100) XMEAS(9), XMEAS(10), XMEAS(11), XMEAS(12)
-     	WRITE(2114,100) XMEAS(13), XMEAS(14), XMEAS(15), XMEAS(16)
-      	WRITE(2115,100) XMEAS(17), XMEAS(18), XMEAS(19), XMEAS(20)
-      	WRITE(2116,100) XMEAS(21), XMEAS(22), XMEAS(23), XMEAS(24)
-      	WRITE(2117,100) XMEAS(25), XMEAS(26), XMEAS(27), XMEAS(28)
-      	WRITE(2118,100) XMEAS(29), XMEAS(30), XMEAS(31), XMEAS(32)
-      	WRITE(2119,100) XMEAS(33), XMEAS(34), XMEAS(35), XMEAS(36)
-      	WRITE(2120,100) XMEAS(37), XMEAS(38), XMEAS(39), XMEAS(40)
-      	WRITE(2121,300) XMEAS(41)
- 100  FORMAT(1X,E13.5,2X,E13.5,2X,E13.5,2X,E13.5)
- 200  FORMAT(1X,E13.5,2X,E13.5,2X,E13.5)
- 300  FORMAT(1X,E13.5)
-C
-      RETURN
-      END
-C
-C=============================================================================
-C
       SUBROUTINE INTGTR(NN,TIME,DELTAT,YY,YP)
-C
+C **********************************************************************
 C  Euler Integration Algorithm
-C
+C     COMPUTES EULER INTEGRATION ALGORITHM
+C **********************************************************************
 C
       INTEGER I, NN
 C
@@ -1379,7 +1368,7 @@ C
 C
       DO 100 I = 1, NN
 C
-          YY(I) = YY(I) + YP(I) * DELTAT 
+          YY(I) = YY(I) + YP(I) * DELTAT
 C
  100  CONTINUE
 C
@@ -1389,20 +1378,20 @@ C
 C=============================================================================
 C
       SUBROUTINE CONSHAND
-C
+C **********************************************************************
 C  Euler Integration Algorithm
-C
+C     ENSURES XMV(I) BETWEEN 0-100% RANGE
+C **********************************************************************
 C
       DOUBLE PRECISION XMEAS, XMV
       COMMON/PV/ XMEAS(41), XMV(12)
 C
-	INTEGER I
-C	
-	DO 100 I=1, 11
-		IF (XMV(I).LE.0.0) XMV(I)=0.
- 		IF (XMV(I).GE.100.0) XMV(I)=100.
+      INTEGER I
+C
+      DO 100 I=1, 11
+        IF (XMV(I).LE.0.0) XMV(I)=0.
+        IF (XMV(I).GE.100.0) XMV(I)=100.
  100    CONTINUE
 C
       RETURN
       END
-
