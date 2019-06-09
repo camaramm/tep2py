@@ -1,4 +1,41 @@
-# Wrap Fortran code in Python using f2py (following the smart way)
+# tep2py
+
+This repository provides a Python interface to the original Fortran program of the Tennessee Eastman Process (TEP) Control Test Problem.
+
+In order to use it properly, you should build the fortran program from source using *f2py*.
+You may refer to the instructions below to build yourself or, if you are in a linux system, you may try the file provided in this repository, which was compiled in a linux machine according to:
+```
+$ uname -srvmpio
+Linux 4.15.0-51-generic #55-Ubuntu SMP Wed May 15 14:27:21 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
+```
+
+## How to use
+
+```python
+# modules
+import numpy as np 
+from tep2py import tep2py
+
+# matrix of disturbances
+idata = np.zeros((5,20))  
+
+# instantiate tep2py object for given `idata`
+tep = tep2py(idata)
+
+# run simulation
+tep.simulate()
+
+# retrieve simulated data as DataFrame
+print(tep.process_data)
+
+# retrieve table of disturbances
+print(tep.info_disturbance)
+
+# retrieve table of variables
+print(tep.info_variable)
+```
+
+## Wrap Fortran code in Python using f2py (following the smart way)
 
 See [this](https://docs.scipy.org/doc/numpy/f2py/getting-started.html#the-smart-way) for more details.
 
@@ -32,29 +69,3 @@ See [this](https://docs.scipy.org/doc/numpy/f2py/getting-started.html#the-smart-
     ```
     import temain_mod
     ```
-
-**Example**
-
-```python
-# modules
-import numpy as np 
-from tep2py import tep2py
-
-# matrix of disturbances
-idata = np.zeros((5,20))  
-
-# instantiate tep2py object for given `idata`
-tep = tep2py(idata)
-
-# run simulation
-tep.simulate()
-
-# retrieve simulated data as DataFrame
-print(tep.process_data)
-
-# retrieve table of disturbances
-print(tep.info_disturbance)
-
-# retrieve table of variables
-print(tep.info_variable)
-```
