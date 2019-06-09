@@ -1,0 +1,726 @@
+!    -*- f90 -*-
+! Note: the context of this file is case sensitive.
+
+python module temain_mod ! in 
+    interface  ! in :temain_mod
+        subroutine temain(npts,nx,idata,xdata,verbose) ! in :temain_mod:src/tep/temain_mod.f
+            integer, intent(in) :: npts
+            integer, intent(in) :: nx
+            integer dimension(nx,20), intent(in), depend(nx) :: idata
+            double precision dimension(nx,52),depend(nx), intent(out) :: xdata
+            integer, intent(in) :: verbose
+            double precision dimension(41) :: xmeas
+            double precision dimension(12) :: xmv
+            integer dimension(20) :: idv
+            double precision dimension(20) :: setpt
+            double precision :: deltat
+            integer :: flag
+            double precision :: gain1
+            double precision :: errold1
+            double precision :: gain2
+            double precision :: errold2
+            double precision :: gain3
+            double precision :: errold3
+            double precision :: gain4
+            double precision :: errold4
+            double precision :: gain5
+            double precision :: taui5
+            double precision :: errold5
+            double precision :: gain6
+            double precision :: errold6
+            double precision :: gain7
+            double precision :: errold7
+            double precision :: gain8
+            double precision :: errold8
+            double precision :: gain9
+            double precision :: errold9
+            double precision :: gain10
+            double precision :: taui10
+            double precision :: errold10
+            double precision :: gain11
+            double precision :: taui11
+            double precision :: errold11
+            double precision :: gain13
+            double precision :: taui13
+            double precision :: errold13
+            double precision :: gain14
+            double precision :: taui14
+            double precision :: errold14
+            double precision :: gain15
+            double precision :: taui15
+            double precision :: errold15
+            double precision :: gain16
+            double precision :: taui16
+            double precision :: errold16
+            double precision :: gain17
+            double precision :: taui17
+            double precision :: errold17
+            double precision :: gain18
+            double precision :: taui18
+            double precision :: errold18
+            double precision :: gain19
+            double precision :: taui19
+            double precision :: errold19
+            double precision :: gain20
+            double precision :: taui20
+            double precision :: errold20
+            double precision :: gain22
+            double precision :: taui22
+            double precision :: errold22
+            common /pv/ xmeas,xmv
+            common /dvec/ idv
+            common /ctrlall/ setpt,deltat
+            common /flag6/ flag
+            common /ctrl1/ gain1,errold1
+            common /ctrl2/ gain2,errold2
+            common /ctrl3/ gain3,errold3
+            common /ctrl4/ gain4,errold4
+            common /ctrl5/ gain5,taui5,errold5
+            common /ctrl6/ gain6,errold6
+            common /ctrl7/ gain7,errold7
+            common /ctrl8/ gain8,errold8
+            common /ctrl9/ gain9,errold9
+            common /ctrl10/ gain10,taui10,errold10
+            common /ctrl11/ gain11,taui11,errold11
+            common /ctrl13/ gain13,taui13,errold13
+            common /ctrl14/ gain14,taui14,errold14
+            common /ctrl15/ gain15,taui15,errold15
+            common /ctrl16/ gain16,taui16,errold16
+            common /ctrl17/ gain17,taui17,errold17
+            common /ctrl18/ gain18,taui18,errold18
+            common /ctrl19/ gain19,taui19,errold19
+            common /ctrl20/ gain20,taui20,errold20
+            common /ctrl22/ gain22,taui22,errold22
+        end subroutine temain
+        subroutine contrl1 ! in :temain_mod:src/tep/temain_mod.f
+            double precision dimension(41) :: xmeas
+            double precision dimension(12) :: xmv
+            double precision dimension(20) :: setpt
+            double precision :: deltat
+            double precision :: gain1
+            double precision :: errold1
+            common /pv/ xmeas,xmv
+            common /ctrlall/ setpt,deltat
+            common /ctrl1/ gain1,errold1
+        end subroutine contrl1
+        subroutine contrl2 ! in :temain_mod:src/tep/temain_mod.f
+            double precision dimension(41) :: xmeas
+            double precision dimension(12) :: xmv
+            double precision dimension(20) :: setpt
+            double precision :: deltat
+            double precision :: gain2
+            double precision :: errold2
+            common /pv/ xmeas,xmv
+            common /ctrlall/ setpt,deltat
+            common /ctrl2/ gain2,errold2
+        end subroutine contrl2
+        subroutine contrl3 ! in :temain_mod:src/tep/temain_mod.f
+            double precision dimension(41) :: xmeas
+            double precision dimension(12) :: xmv
+            double precision dimension(20) :: setpt
+            double precision :: deltat
+            double precision :: gain3
+            double precision :: errold3
+            common /pv/ xmeas,xmv
+            common /ctrlall/ setpt,deltat
+            common /ctrl3/ gain3,errold3
+        end subroutine contrl3
+        subroutine contrl4 ! in :temain_mod:src/tep/temain_mod.f
+            double precision dimension(41) :: xmeas
+            double precision dimension(12) :: xmv
+            double precision dimension(20) :: setpt
+            double precision :: deltat
+            double precision :: gain4
+            double precision :: errold4
+            common /pv/ xmeas,xmv
+            common /ctrlall/ setpt,deltat
+            common /ctrl4/ gain4,errold4
+        end subroutine contrl4
+        subroutine contrl5 ! in :temain_mod:src/tep/temain_mod.f
+            double precision dimension(41) :: xmeas
+            double precision dimension(12) :: xmv
+            double precision dimension(20) :: setpt
+            double precision :: deltat
+            double precision :: gain5
+            double precision :: taui5
+            double precision :: errold5
+            common /pv/ xmeas,xmv
+            common /ctrlall/ setpt,deltat
+            common /ctrl5/ gain5,taui5,errold5
+        end subroutine contrl5
+        subroutine contrl6 ! in :temain_mod:src/tep/temain_mod.f
+            double precision dimension(41) :: xmeas
+            double precision dimension(12) :: xmv
+            integer :: flag
+            double precision dimension(20) :: setpt
+            double precision :: deltat
+            double precision :: gain6
+            double precision :: errold6
+            common /pv/ xmeas,xmv
+            common /flag6/ flag
+            common /ctrlall/ setpt,deltat
+            common /ctrl6/ gain6,errold6
+        end subroutine contrl6
+        subroutine contrl7 ! in :temain_mod:src/tep/temain_mod.f
+            double precision dimension(41) :: xmeas
+            double precision dimension(12) :: xmv
+            double precision dimension(20) :: setpt
+            double precision :: deltat
+            double precision :: gain7
+            double precision :: errold7
+            common /pv/ xmeas,xmv
+            common /ctrlall/ setpt,deltat
+            common /ctrl7/ gain7,errold7
+        end subroutine contrl7
+        subroutine contrl8 ! in :temain_mod:src/tep/temain_mod.f
+            double precision dimension(41) :: xmeas
+            double precision dimension(12) :: xmv
+            double precision dimension(20) :: setpt
+            double precision :: deltat
+            double precision :: gain8
+            double precision :: errold8
+            common /pv/ xmeas,xmv
+            common /ctrlall/ setpt,deltat
+            common /ctrl8/ gain8,errold8
+        end subroutine contrl8
+        subroutine contrl9 ! in :temain_mod:src/tep/temain_mod.f
+            double precision dimension(41) :: xmeas
+            double precision dimension(12) :: xmv
+            double precision dimension(20) :: setpt
+            double precision :: deltat
+            double precision :: gain9
+            double precision :: errold9
+            common /pv/ xmeas,xmv
+            common /ctrlall/ setpt,deltat
+            common /ctrl9/ gain9,errold9
+        end subroutine contrl9
+        subroutine contrl10 ! in :temain_mod:src/tep/temain_mod.f
+            double precision dimension(41) :: xmeas
+            double precision dimension(12) :: xmv
+            double precision dimension(20) :: setpt
+            double precision :: deltat
+            double precision :: gain10
+            double precision :: taui10
+            double precision :: errold10
+            common /pv/ xmeas,xmv
+            common /ctrlall/ setpt,deltat
+            common /ctrl10/ gain10,taui10,errold10
+        end subroutine contrl10
+        subroutine contrl11 ! in :temain_mod:src/tep/temain_mod.f
+            double precision dimension(41) :: xmeas
+            double precision dimension(12) :: xmv
+            double precision dimension(20) :: setpt
+            double precision :: deltat
+            double precision :: gain11
+            double precision :: taui11
+            double precision :: errold11
+            common /pv/ xmeas,xmv
+            common /ctrlall/ setpt,deltat
+            common /ctrl11/ gain11,taui11,errold11
+        end subroutine contrl11
+        subroutine contrl13 ! in :temain_mod:src/tep/temain_mod.f
+            double precision dimension(41) :: xmeas
+            double precision dimension(12) :: xmv
+            double precision dimension(20) :: setpt
+            double precision :: deltat
+            double precision :: gain13
+            double precision :: taui13
+            double precision :: errold13
+            common /pv/ xmeas,xmv
+            common /ctrlall/ setpt,deltat
+            common /ctrl13/ gain13,taui13,errold13
+        end subroutine contrl13
+        subroutine contrl14 ! in :temain_mod:src/tep/temain_mod.f
+            double precision dimension(41) :: xmeas
+            double precision dimension(12) :: xmv
+            double precision dimension(20) :: setpt
+            double precision :: deltat
+            double precision :: gain14
+            double precision :: taui14
+            double precision :: errold14
+            common /pv/ xmeas,xmv
+            common /ctrlall/ setpt,deltat
+            common /ctrl14/ gain14,taui14,errold14
+        end subroutine contrl14
+        subroutine contrl15 ! in :temain_mod:src/tep/temain_mod.f
+            double precision dimension(41) :: xmeas
+            double precision dimension(12) :: xmv
+            double precision dimension(20) :: setpt
+            double precision :: deltat
+            double precision :: gain15
+            double precision :: taui15
+            double precision :: errold15
+            common /pv/ xmeas,xmv
+            common /ctrlall/ setpt,deltat
+            common /ctrl15/ gain15,taui15,errold15
+        end subroutine contrl15
+        subroutine contrl16 ! in :temain_mod:src/tep/temain_mod.f
+            double precision dimension(41) :: xmeas
+            double precision dimension(12) :: xmv
+            double precision dimension(20) :: setpt
+            double precision :: deltat
+            double precision :: gain16
+            double precision :: taui16
+            double precision :: errold16
+            common /pv/ xmeas,xmv
+            common /ctrlall/ setpt,deltat
+            common /ctrl16/ gain16,taui16,errold16
+        end subroutine contrl16
+        subroutine contrl17 ! in :temain_mod:src/tep/temain_mod.f
+            double precision dimension(41) :: xmeas
+            double precision dimension(12) :: xmv
+            double precision dimension(20) :: setpt
+            double precision :: deltat
+            double precision :: gain17
+            double precision :: taui17
+            double precision :: errold17
+            common /pv/ xmeas,xmv
+            common /ctrlall/ setpt,deltat
+            common /ctrl17/ gain17,taui17,errold17
+        end subroutine contrl17
+        subroutine contrl18 ! in :temain_mod:src/tep/temain_mod.f
+            double precision dimension(41) :: xmeas
+            double precision dimension(12) :: xmv
+            double precision dimension(20) :: setpt
+            double precision :: deltat
+            double precision :: gain18
+            double precision :: taui18
+            double precision :: errold18
+            common /pv/ xmeas,xmv
+            common /ctrlall/ setpt,deltat
+            common /ctrl18/ gain18,taui18,errold18
+        end subroutine contrl18
+        subroutine contrl19 ! in :temain_mod:src/tep/temain_mod.f
+            double precision dimension(41) :: xmeas
+            double precision dimension(12) :: xmv
+            double precision dimension(20) :: setpt
+            double precision :: deltat
+            double precision :: gain19
+            double precision :: taui19
+            double precision :: errold19
+            common /pv/ xmeas,xmv
+            common /ctrlall/ setpt,deltat
+            common /ctrl19/ gain19,taui19,errold19
+        end subroutine contrl19
+        subroutine contrl20 ! in :temain_mod:src/tep/temain_mod.f
+            double precision dimension(41) :: xmeas
+            double precision dimension(12) :: xmv
+            double precision dimension(20) :: setpt
+            double precision :: deltat
+            double precision :: gain20
+            double precision :: taui20
+            double precision :: errold20
+            common /pv/ xmeas,xmv
+            common /ctrlall/ setpt,deltat
+            common /ctrl20/ gain20,taui20,errold20
+        end subroutine contrl20
+        subroutine contrl22 ! in :temain_mod:src/tep/temain_mod.f
+            double precision dimension(41) :: xmeas
+            double precision dimension(12) :: xmv
+            double precision dimension(20) :: setpt
+            double precision :: deltat
+            double precision :: gain22
+            double precision :: taui22
+            double precision :: errold22
+            common /pv/ xmeas,xmv
+            common /ctrlall/ setpt,deltat
+            common /ctrl22/ gain22,taui22,errold22
+        end subroutine contrl22
+        subroutine intgtr(nn,time,deltat,yy,yp) ! in :temain_mod:src/tep/temain_mod.f
+            integer, optional,check(len(yy)>=nn),depend(yy) :: nn=len(yy)
+            double precision :: time
+            double precision :: deltat
+            double precision dimension(nn) :: yy
+            double precision dimension(nn),depend(nn) :: yp
+        end subroutine intgtr
+        subroutine conshand ! in :temain_mod:src/tep/temain_mod.f
+            double precision dimension(41) :: xmeas
+            double precision dimension(12) :: xmv
+            common /pv/ xmeas,xmv
+        end subroutine conshand
+        subroutine tefunc(nn,time,yy,yp) ! in :temain_mod:src/tep/teprob.f
+            integer, optional,check(len(yy)>=nn),depend(yy) :: nn=len(yy)
+            double precision :: time
+            double precision dimension(nn) :: yy
+            double precision dimension(nn),depend(nn) :: yp
+            double precision dimension(41) :: xmeas
+            double precision dimension(12) :: xmv
+            integer dimension(20) :: idv
+            real dimension(8) :: uclr
+            real dimension(8) :: ucvr
+            real :: utlr
+            real :: utvr
+            real dimension(8) :: xlr
+            real dimension(8) :: xvr
+            real :: etr
+            real :: esr
+            real :: tcr
+            real :: tkr
+            real :: dlr
+            real :: vlr
+            real :: vvr
+            real :: vtr
+            real :: ptr
+            real dimension(8) :: ppr
+            real dimension(8) :: crxr
+            real dimension(4) :: rr
+            real :: rh
+            real :: fwr
+            real :: twr
+            real :: qur
+            real :: hwr
+            real :: uar
+            real dimension(8) :: ucls
+            real dimension(8) :: ucvs
+            real :: utls
+            real :: utvs
+            real dimension(8) :: xls
+            real dimension(8) :: xvs
+            real :: ets
+            real :: ess
+            real :: tcs
+            real :: tks
+            real :: dls
+            real :: vls
+            real :: vvs
+            real :: vts
+            real :: pts
+            real dimension(8) :: pps
+            real :: fws
+            real :: tws
+            real :: qus
+            real :: hws
+            real dimension(8) :: uclc
+            real :: utlc
+            real dimension(8) :: xlc
+            real :: etc
+            real :: esc
+            real :: tcc
+            real :: dlc
+            real :: vlc
+            real :: vtc
+            real :: quc
+            real dimension(8) :: ucvv
+            real :: utvv
+            real dimension(8) :: xvv
+            real :: etv
+            real :: esv
+            real :: tcv
+            real :: tkv
+            real :: vtv
+            real :: ptv
+            real dimension(12) :: vcv
+            real dimension(12) :: vrng
+            real dimension(12) :: vtau
+            real dimension(13) :: ftm
+            real dimension(8,13) :: fcm
+            real dimension(8,13) :: xst
+            real dimension(13) :: xmws
+            real dimension(13) :: hst
+            real dimension(13) :: tst
+            real dimension(8) :: sfr
+            real :: cpflmx
+            real :: cpprmx
+            real :: cpdh
+            real :: tcwr
+            real :: tcws
+            real dimension(3) :: htr
+            real :: agsp
+            real dimension(41) :: xdel
+            real dimension(41) :: xns
+            real :: tgas
+            real :: tprod
+            real dimension(12) :: vst
+            integer dimension(12) :: ivst
+            real dimension(12) :: adist
+            real dimension(12) :: bdist
+            real dimension(12) :: cdist
+            real dimension(12) :: ddist
+            real dimension(12) :: tlast
+            real dimension(12) :: tnext
+            real dimension(12) :: hspan
+            real dimension(12) :: hzero
+            real dimension(12) :: sspan
+            real dimension(12) :: szero
+            real dimension(12) :: spspan
+            integer dimension(12) :: idvwlk
+            real dimension(8) :: avp
+            real dimension(8) :: bvp
+            real dimension(8) :: cvp
+            real dimension(8) :: ah
+            real dimension(8) :: bh
+            real dimension(8) :: ch
+            real dimension(8) :: ag
+            real dimension(8) :: bg
+            real dimension(8) :: cg
+            real dimension(8) :: av
+            real dimension(8) :: ad
+            real dimension(8) :: bd
+            real dimension(8) :: cd
+            real dimension(8) :: xmw
+            common /pv/ xmeas,xmv
+            common /dvec/ idv
+            common /teproc/ uclr,ucvr,utlr,utvr,xlr,xvr,etr,esr,tcr,tkr,dlr,vlr,vvr,vtr,ptr,ppr,crxr,rr,rh,fwr,twr,qur,hwr,uar,ucls,ucvs,utls,utvs,xls,xvs,ets,ess,tcs,tks,dls,vls,vvs,vts,pts,pps,fws,tws,qus,hws,uclc,utlc,xlc,etc,esc,tcc,dlc,vlc,vtc,quc,ucvv,utvv,xvv,etv,esv,tcv,tkv,vtv,ptv,vcv,vrng,vtau,ftm,fcm,xst,xmws,hst,tst,sfr,cpflmx,cpprmx,cpdh,tcwr,tcws,htr,agsp,xdel,xns,tgas,tprod,vst,ivst
+            common /wlk/ adist,bdist,cdist,ddist,tlast,tnext,hspan,hzero,sspan,szero,spspan,idvwlk
+            common /const/ avp,bvp,cvp,ah,bh,ch,ag,bg,cg,av,ad,bd,cd,xmw
+        end subroutine tefunc
+        subroutine teinit(nn,time,yy,yp) ! in :temain_mod:src/tep/teprob.f
+            integer, optional,check(len(yy)>=nn),depend(yy) :: nn=len(yy)
+            double precision :: time
+            double precision dimension(nn) :: yy
+            double precision dimension(nn),depend(nn) :: yp
+            double precision dimension(41) :: xmeas
+            double precision dimension(12) :: xmv
+            integer dimension(20) :: idv
+            double precision :: g
+            real dimension(8) :: uclr
+            real dimension(8) :: ucvr
+            real :: utlr
+            real :: utvr
+            real dimension(8) :: xlr
+            real dimension(8) :: xvr
+            real :: etr
+            real :: esr
+            real :: tcr
+            real :: tkr
+            real :: dlr
+            real :: vlr
+            real :: vvr
+            real :: vtr
+            real :: ptr
+            real dimension(8) :: ppr
+            real dimension(8) :: crxr
+            real dimension(4) :: rr
+            real :: rh
+            real :: fwr
+            real :: twr
+            real :: qur
+            real :: hwr
+            real :: uar
+            real dimension(8) :: ucls
+            real dimension(8) :: ucvs
+            real :: utls
+            real :: utvs
+            real dimension(8) :: xls
+            real dimension(8) :: xvs
+            real :: ets
+            real :: ess
+            real :: tcs
+            real :: tks
+            real :: dls
+            real :: vls
+            real :: vvs
+            real :: vts
+            real :: pts
+            real dimension(8) :: pps
+            real :: fws
+            real :: tws
+            real :: qus
+            real :: hws
+            real dimension(8) :: uclc
+            real :: utlc
+            real dimension(8) :: xlc
+            real :: etc
+            real :: esc
+            real :: tcc
+            real :: dlc
+            real :: vlc
+            real :: vtc
+            real :: quc
+            real dimension(8) :: ucvv
+            real :: utvv
+            real dimension(8) :: xvv
+            real :: etv
+            real :: esv
+            real :: tcv
+            real :: tkv
+            real :: vtv
+            real :: ptv
+            real dimension(12) :: vcv
+            real dimension(12) :: vrng
+            real dimension(12) :: vtau
+            real dimension(13) :: ftm
+            real dimension(8,13) :: fcm
+            real dimension(8,13) :: xst
+            real dimension(13) :: xmws
+            real dimension(13) :: hst
+            real dimension(13) :: tst
+            real dimension(8) :: sfr
+            real :: cpflmx
+            real :: cpprmx
+            real :: cpdh
+            real :: tcwr
+            real :: tcws
+            real dimension(3) :: htr
+            real :: agsp
+            real dimension(41) :: xdel
+            real dimension(41) :: xns
+            real :: tgas
+            real :: tprod
+            real dimension(12) :: vst
+            integer dimension(12) :: ivst
+            real dimension(12) :: adist
+            real dimension(12) :: bdist
+            real dimension(12) :: cdist
+            real dimension(12) :: ddist
+            real dimension(12) :: tlast
+            real dimension(12) :: tnext
+            real dimension(12) :: hspan
+            real dimension(12) :: hzero
+            real dimension(12) :: sspan
+            real dimension(12) :: szero
+            real dimension(12) :: spspan
+            integer dimension(12) :: idvwlk
+            real dimension(8) :: avp
+            real dimension(8) :: bvp
+            real dimension(8) :: cvp
+            real dimension(8) :: ah
+            real dimension(8) :: bh
+            real dimension(8) :: ch
+            real dimension(8) :: ag
+            real dimension(8) :: bg
+            real dimension(8) :: cg
+            real dimension(8) :: av
+            real dimension(8) :: ad
+            real dimension(8) :: bd
+            real dimension(8) :: cd
+            real dimension(8) :: xmw
+            common /pv/ xmeas,xmv
+            common /dvec/ idv
+            common /randsd/ g
+            common /teproc/ uclr,ucvr,utlr,utvr,xlr,xvr,etr,esr,tcr,tkr,dlr,vlr,vvr,vtr,ptr,ppr,crxr,rr,rh,fwr,twr,qur,hwr,uar,ucls,ucvs,utls,utvs,xls,xvs,ets,ess,tcs,tks,dls,vls,vvs,vts,pts,pps,fws,tws,qus,hws,uclc,utlc,xlc,etc,esc,tcc,dlc,vlc,vtc,quc,ucvv,utvv,xvv,etv,esv,tcv,tkv,vtv,ptv,vcv,vrng,vtau,ftm,fcm,xst,xmws,hst,tst,sfr,cpflmx,cpprmx,cpdh,tcwr,tcws,htr,agsp,xdel,xns,tgas,tprod,vst,ivst
+            common /wlk/ adist,bdist,cdist,ddist,tlast,tnext,hspan,hzero,sspan,szero,spspan,idvwlk
+            common /const/ avp,bvp,cvp,ah,bh,ch,ag,bg,cg,av,ad,bd,cd,xmw
+        end subroutine teinit
+        subroutine tesub1(z,t,h,ity) ! in :temain_mod:src/tep/teprob.f
+            double precision dimension(8) :: z
+            double precision :: t
+            double precision :: h
+            integer :: ity
+            real dimension(8) :: avp
+            real dimension(8) :: bvp
+            real dimension(8) :: cvp
+            real dimension(8) :: ah
+            real dimension(8) :: bh
+            real dimension(8) :: ch
+            real dimension(8) :: ag
+            real dimension(8) :: bg
+            real dimension(8) :: cg
+            real dimension(8) :: av
+            real dimension(8) :: ad
+            real dimension(8) :: bd
+            real dimension(8) :: cd
+            real dimension(8) :: xmw
+            common /const/ avp,bvp,cvp,ah,bh,ch,ag,bg,cg,av,ad,bd,cd,xmw
+        end subroutine tesub1
+        subroutine tesub2(z,t,h,ity) ! in :temain_mod:src/tep/teprob.f
+            double precision dimension(8) :: z
+            double precision :: t
+            double precision :: h
+            integer :: ity
+            real dimension(8) :: avp
+            real dimension(8) :: bvp
+            real dimension(8) :: cvp
+            real dimension(8) :: ah
+            real dimension(8) :: bh
+            real dimension(8) :: ch
+            real dimension(8) :: ag
+            real dimension(8) :: bg
+            real dimension(8) :: cg
+            real dimension(8) :: av
+            real dimension(8) :: ad
+            real dimension(8) :: bd
+            real dimension(8) :: cd
+            real dimension(8) :: xmw
+            common /const/ avp,bvp,cvp,ah,bh,ch,ag,bg,cg,av,ad,bd,cd,xmw
+        end subroutine tesub2
+        subroutine tesub3(z,t,dh,ity) ! in :temain_mod:src/tep/teprob.f
+            double precision dimension(8) :: z
+            double precision :: t
+            double precision :: dh
+            integer :: ity
+            real dimension(8) :: avp
+            real dimension(8) :: bvp
+            real dimension(8) :: cvp
+            real dimension(8) :: ah
+            real dimension(8) :: bh
+            real dimension(8) :: ch
+            real dimension(8) :: ag
+            real dimension(8) :: bg
+            real dimension(8) :: cg
+            real dimension(8) :: av
+            real dimension(8) :: ad
+            real dimension(8) :: bd
+            real dimension(8) :: cd
+            real dimension(8) :: xmw
+            common /const/ avp,bvp,cvp,ah,bh,ch,ag,bg,cg,av,ad,bd,cd,xmw
+        end subroutine tesub3
+        subroutine tesub4(x,t,r) ! in :temain_mod:src/tep/teprob.f
+            double precision dimension(8) :: x
+            double precision :: t
+            double precision :: r
+            real dimension(8) :: avp
+            real dimension(8) :: bvp
+            real dimension(8) :: cvp
+            real dimension(8) :: ah
+            real dimension(8) :: bh
+            real dimension(8) :: ch
+            real dimension(8) :: ag
+            real dimension(8) :: bg
+            real dimension(8) :: cg
+            real dimension(8) :: av
+            real dimension(8) :: ad
+            real dimension(8) :: bd
+            real dimension(8) :: cd
+            real dimension(8) :: xmw
+            common /const/ avp,bvp,cvp,ah,bh,ch,ag,bg,cg,av,ad,bd,cd,xmw
+        end subroutine tesub4
+        subroutine tesub5(s,sp,adist,bdist,cdist,ddist,tlast,tnext,hspan,hzero,sspan,szero,spspan,idvflag) ! in :temain_mod:src/tep/teprob.f
+            real :: s
+            real :: sp
+            real :: adist
+            real :: bdist
+            real :: cdist
+            real :: ddist
+            real :: tlast
+            real :: tnext
+            real :: hspan
+            real :: hzero
+            real :: sspan
+            real :: szero
+            real :: spspan
+            integer :: idvflag
+        end subroutine tesub5
+        subroutine tesub6(std,x) ! in :temain_mod:src/tep/teprob.f
+            double precision :: std
+            double precision :: x
+        end subroutine tesub6
+        function tesub7(i) ! in :temain_mod:src/tep/teprob.f
+            integer :: i
+            double precision :: g
+            double precision :: tesub7
+            common /randsd/ g
+        end function tesub7
+        function tesub8(i,t) ! in :temain_mod:src/tep/teprob.f
+            integer :: i
+            double precision :: t
+            real dimension(12) :: adist
+            real dimension(12) :: bdist
+            real dimension(12) :: cdist
+            real dimension(12) :: ddist
+            real dimension(12) :: tlast
+            real dimension(12) :: tnext
+            real dimension(12) :: hspan
+            real dimension(12) :: hzero
+            real dimension(12) :: sspan
+            real dimension(12) :: szero
+            real dimension(12) :: spspan
+            integer dimension(12) :: idvwlk
+            double precision :: tesub8
+            common /wlk/ adist,bdist,cdist,ddist,tlast,tnext,hspan,hzero,sspan,szero,spspan,idvwlk
+        end function tesub8
+    end interface 
+end python module temain_mod
+
+! This file was auto-generated with f2py (version:2).
+! See http://cens.ioc.ee/projects/f2py2e/
