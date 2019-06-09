@@ -454,9 +454,10 @@ C
 C
       TEST4=MOD(I,180)
       IF (TEST4.EQ.0) THEN
-        CALL OUTPUT
-            WRITE(111,111) I
- 111  		FORMAT(1X,I6)
+        IDV(:) = IDATA(K,:)
+        XDATA(K,1:41) = XMEAS(:)
+        XDATA(K,42:52) = XMV(1:11)
+        K = K + 1
       ENDIF
 C
       CALL INTGTR(NN,TIME,DELTAT,YY,YP)
@@ -464,8 +465,9 @@ C
       CALL CONSHAND
 C
  1000 CONTINUE
-      PRINT *, 'Simulation is done.'
-
+      IF (VERBOSE.EQ.1) THEN
+        PRINT *, 'Simulation is done.'
+      ENDIF
 C
       CLOSE(UNIT=111)
       CLOSE(UNIT=1111)
@@ -485,6 +487,7 @@ C
       STOP
 
 
+      RETURN
       END
 C
 C=============================================================================
