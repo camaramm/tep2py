@@ -394,27 +394,6 @@ C
       DO 100 I = 1, 20
           IDV(I) = 0
  100  CONTINUE
-C      IDV(20)=1	
-C
-C
-C
-C
-	OPEN(UNIT=111,FILE='~/TE_data_inc.dat',STATUS='new')
-	OPEN(UNIT=1111,FILE='~/TE_data_mv1.dat',STATUS='new')
-	OPEN(UNIT=1112,FILE='~/TE_data_mv2.dat',STATUS='new')
-	OPEN(UNIT=1113,FILE='~/TE_data_mv3.dat',STATUS='new')
-	OPEN(UNIT=2111,FILE='~/TE_data_me01.dat',STATUS='new')
-	OPEN(UNIT=2112,FILE='~/TE_data_me02.dat',STATUS='new')
-	OPEN(UNIT=2113,FILE='~/TE_data_me03.dat',STATUS='new')
-	OPEN(UNIT=2114,FILE='~/TE_data_me04.dat',STATUS='new')
-	OPEN(UNIT=2115,FILE='~/TE_data_me05.dat',STATUS='new')
-	OPEN(UNIT=2116,FILE='~/TE_data_me06.dat',STATUS='new')
-	OPEN(UNIT=2117,FILE='~/TE_data_me07.dat',STATUS='new')
-	OPEN(UNIT=2118,FILE='~/TE_data_me08.dat',STATUS='new')
-	OPEN(UNIT=2119,FILE='~/TE_data_me09.dat',STATUS='new')
-	OPEN(UNIT=2120,FILE='~/TE_data_me10.dat',STATUS='new')
-	OPEN(UNIT=2121,FILE='~/TE_data_me11.dat',STATUS='new')
-C
 C
 C  Simulation Loop
 C
@@ -469,24 +448,6 @@ C
         PRINT *, 'Simulation is done.'
       ENDIF
 C
-      CLOSE(UNIT=111)
-      CLOSE(UNIT=1111)
-      CLOSE(UNIT=1112)
-      CLOSE(UNIT=1113)
-      CLOSE(UNIT=2111)
-      CLOSE(UNIT=2112)
-      CLOSE(UNIT=2113)
-      CLOSE(UNIT=2114)
-      CLOSE(UNIT=2115)
-      CLOSE(UNIT=2116)
-      CLOSE(UNIT=2117)
-      CLOSE(UNIT=2118)
-      CLOSE(UNIT=2119)
-      CLOSE(UNIT=2120)
-      CLOSE(UNIT=2121)
-      STOP
-
-
       RETURN
       END
 C
@@ -1385,37 +1346,6 @@ C
       XMV(6) = XMV(6) + DXMV
 C
       ERROLD22 = ERR22
-C
-      RETURN
-      END
-C
-C=============================================================================
-C
-      SUBROUTINE OUTPUT
-C
-C
-C   MEASUREMENT AND VALVE COMMON BLOCK
-C
-      DOUBLE PRECISION XMEAS, XMV
-      COMMON/PV/ XMEAS(41), XMV(12)
-C
-        WRITE(1111,100) XMV(1), XMV(2), XMV(3), XMV(4)
-      	WRITE(1112,100) XMV(5), XMV(6), XMV(7), XMV(8)
-      	WRITE(1113,100) XMV(9), XMV(10), XMV(11), XMV(12)
-      	WRITE(2111,100) XMEAS(1), XMEAS(2), XMEAS(3), XMEAS(4)
-      	WRITE(2112,100) XMEAS(5), XMEAS(6), XMEAS(7), XMEAS(8)
-      	WRITE(2113,100) XMEAS(9), XMEAS(10), XMEAS(11), XMEAS(12)
-     	WRITE(2114,100) XMEAS(13), XMEAS(14), XMEAS(15), XMEAS(16)
-      	WRITE(2115,100) XMEAS(17), XMEAS(18), XMEAS(19), XMEAS(20)
-      	WRITE(2116,100) XMEAS(21), XMEAS(22), XMEAS(23), XMEAS(24)
-      	WRITE(2117,100) XMEAS(25), XMEAS(26), XMEAS(27), XMEAS(28)
-      	WRITE(2118,100) XMEAS(29), XMEAS(30), XMEAS(31), XMEAS(32)
-      	WRITE(2119,100) XMEAS(33), XMEAS(34), XMEAS(35), XMEAS(36)
-      	WRITE(2120,100) XMEAS(37), XMEAS(38), XMEAS(39), XMEAS(40)
-      	WRITE(2121,300) XMEAS(41)
- 100  FORMAT(1X,E13.5,2X,E13.5,2X,E13.5,2X,E13.5)
- 200  FORMAT(1X,E13.5,2X,E13.5,2X,E13.5)
- 300  FORMAT(1X,E13.5)
 C
       RETURN
       END
