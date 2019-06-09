@@ -269,8 +269,12 @@ C
 C  Local Variables
 C
       INTEGER I, NN, NPTS, TEST, TEST1, TEST3, TEST4
-C
       DOUBLE PRECISION TIME, YY(50), YP(50)
+C
+C  New local variables from subroutine
+C
+      INTEGER IDATA(NX, 20), K, VERBOSE
+      DOUBLE PRECISION XDATA(NX, 52)
 C
 C  Set the number of differential equations (states).  The process has 50
 C  states.  If the user wishes to integrate additional states, NN must be
@@ -278,26 +282,15 @@ C  increased by the number of additional differential equations.
 C
       NN = 50
 C
-C  Set the number of points to simulate
-C
-      NPTS = 172800
-
-C
-C  Set the number of pints to simulate in steady state operation
-C
-
-      SSPTS = 3600 * 8
-
-
-C
 C  Integrator Step Size:  1 Second Converted to Hours
 C
       DELTAT = 1. / 3600.
 C
 C  Initialize Process
-C  (Sets TIME to zero)
+C  (Sets TIME to zero and K to one)
 C
       CALL TEINIT(NN,TIME,YY,YP)
+      K = 1
 C
 C  Set Controller Parameters
 C  Make a Stripper Level Set Point Change of +15%
