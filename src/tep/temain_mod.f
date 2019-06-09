@@ -243,7 +243,7 @@ CC      SETPT = XMEAS(15) + 15.0
 CC      GAIN = 2.0
 CC      TAUI = 5.0
 CC      ERROLD = 0.0
-      SETPT(1)=3664.0        
+      SETPT(1)=3664.0
       GAIN1=1.0
       ERROLD1=0.0
       SETPT(2)=4509.3
@@ -256,80 +256,80 @@ CC      ERROLD = 0.0
       GAIN4=1.
       ERROLD4=0.0
       SETPT(5)=26.902
-      GAIN5=-0.083 	   
-      TAUI5=1./3600.   
+      GAIN5=-0.083
+      TAUI5=1./3600.
       ERROLD5=0.0
-      SETPT(6)=0.33712  
-      GAIN6=1.22        	       
+      SETPT(6)=0.33712
+      GAIN6=1.22
       ERROLD6=0.0
       SETPT(7)=50.0
-      GAIN7=-2.06      
+      GAIN7=-2.06
       ERROLD7=0.0
       SETPT(8)=50.0
-      GAIN8=-1.62      
+      GAIN8=-1.62
       ERROLD8=0.0
       SETPT(9)=230.31
-      GAIN9=0.41          
-      ERROLD9=0.0	
+      GAIN9=0.41
+      ERROLD9=0.0
       SETPT(10)=94.599
-      GAIN10= -0.156     * 10.
-      TAUI10=1452./3600. 
+      GAIN10= -0.156 * 10.
+      TAUI10=1452./3600.
       ERROLD10=0.0
-      SETPT(11)=22.949    
-      GAIN11=1.09	  
+      SETPT(11)=22.949
+      GAIN11=1.09
       TAUI11=2600./3600.
       ERROLD11=0.0
       SETPT(13)=32.188
-      GAIN13=18.              
-      TAUI13=3168./3600.   
+      GAIN13=18.
+      TAUI13=3168./3600.
       ERROLD13=0.0
       SETPT(14)=6.8820
-      GAIN14=8.3	  
+      GAIN14=8.3
       TAUI14=3168.0/3600.
       ERROLD14=0.0
-      SETPT(15)=18.776 	  		
-      GAIN15=2.37	  	
-      TAUI15=5069./3600.    
+      SETPT(15)=18.776
+      GAIN15=2.37
+      TAUI15=5069./3600.
       ERROLD15=0.0
       SETPT(16)=65.731
-      GAIN16=1.69	  / 10.
+      GAIN16=1.69 / 10.
       TAUI16=236./3600.
       ERROLD16=0.0
       SETPT(17)=75.000
-      GAIN17=11.1	/ 10.
-      TAUI17=3168./3600.  
-      ERROLD17=0.0	  
+      GAIN17=11.1 / 10.
+      TAUI17=3168./3600.
+      ERROLD17=0.0
       SETPT(18)=120.40
-      GAIN18=2.83	* 10.
+      GAIN18=2.83 * 10.
       TAUI18=982./3600.
       ERROLD18=0.0
       SETPT(19)=13.823
-      GAIN19=-83.2	  / 5. /3.  
-      TAUI19=6336./3600. 
+      GAIN19=-83.2 / 5. /3.
+      TAUI19=6336./3600.
       ERROLD19=0.0
-      SETPT(20)=0.83570  
-      GAIN20=-16.3	 / 5.	   
-      TAUI20=12408./3600.  
+      SETPT(20)=0.83570
+      GAIN20=-16.3 / 5.
+      TAUI20=12408./3600.
       ERROLD20=0.0
       SETPT(12)=2633.7
-      GAIN22=-1.0	  * 5.	   
-      TAUI22=1000./3600.  
+      GAIN22=-1.0 * 5.
+      TAUI22=1000./3600.
       ERROLD22=0.0
 C
 C    Example Disturbance:
 C    Change Reactor Cooling
 C
- 	XMV(1) = 63.053 + 0.
-	XMV(2) = 53.980 + 0.
-	XMV(3) = 24.644 + 0.    
-	XMV(4) = 61.302 + 0.
-	XMV(5) = 22.210 + 0.
-	XMV(6) = 40.064 + 0.
-	XMV(7) = 38.100 + 0.
-	XMV(8) = 46.534 + 0.
-	XMV(9) = 47.446 + 0.
-	XMV(10)= 41.106 + 0.
-	XMV(11)= 18.114 + 0.
+      XMV(1) = 63.053 + 0.
+      XMV(2) = 53.980 + 0.
+      XMV(3) = 24.644 + 0.
+      XMV(4) = 61.302 + 0.
+      XMV(5) = 22.210 + 0.
+      XMV(6) = 40.064 + 0.
+      XMV(7) = 38.100 + 0.
+      XMV(8) = 46.534 + 0.
+      XMV(9) = 47.446 + 0.
+      XMV(10)= 41.106 + 0.
+      XMV(11)= 18.114 + 0.
 C
 C	SETPT(6)=SETPT(6) + 0.2
 C
@@ -362,72 +362,70 @@ C
 C
 C  Simulation Loop
 C
-        DO 1000 I = 1, NPTS
-         IF (I.GE.SSPTS) THEN
-                 IDV(12)=1
-          ENDIF
-	  TEST=MOD(I,3)
-	  IF (TEST.EQ.0) THEN
-		CALL CONTRL1
-	  	CALL CONTRL2
-	  	CALL CONTRL3
-	  	CALL CONTRL4
-	  	CALL CONTRL5
-	  	CALL CONTRL6
-	  	CALL CONTRL7
-	  	CALL CONTRL8
-	  	CALL CONTRL9
-	  	CALL CONTRL10
-	  	CALL CONTRL11
-	  	CALL CONTRL16
-	  	CALL CONTRL17
-	  	CALL CONTRL18
-	  ENDIF
+      DO 1000 I = 1, NPTS
+      TEST=MOD(I,3)
+      IF (TEST.EQ.0) THEN
+        CALL CONTRL1
+        CALL CONTRL2
+        CALL CONTRL3
+        CALL CONTRL4
+        CALL CONTRL5
+        CALL CONTRL6
+        CALL CONTRL7
+        CALL CONTRL8
+        CALL CONTRL9
+        CALL CONTRL10
+        CALL CONTRL11
+        CALL CONTRL16
+        CALL CONTRL17
+        CALL CONTRL18
+      ENDIF
           TEST1=MOD(I,360)
-	  IF (TEST1.EQ.0) THEN
-	  	CALL CONTRL13
-	  	CALL CONTRL14
-	  	CALL CONTRL15
-	  	CALL CONTRL19
-	  ENDIF
-	  TEST1=MOD(I,900)
-	  IF (TEST1.EQ.0) CALL CONTRL20
-	  TEST3=MOD(I,5000)       
-	  IF (TEST3.EQ.0) THEN
-		PRINT *, 'Simulation time (in seconds) = ', I
-	
-	ENDIF
+      IF (TEST1.EQ.0) THEN
+        CALL CONTRL13
+        CALL CONTRL14
+        CALL CONTRL15
+        CALL CONTRL19
+      ENDIF
+      TEST1=MOD(I,900)
+      IF (TEST1.EQ.0) CALL CONTRL20
+      IF (VERBOSE.EQ.1) THEN
+        TEST3=MOD(I,5000)
+        IF (TEST3.EQ.0) THEN
+          PRINT *, 'Simulation time (in seconds) = ', I, XMEAS(7)
+        ENDIF
+      ENDIF
 C
- 	TEST4=MOD(I,180)	
-	IF (TEST4.EQ.0) THEN
-		CALL OUTPUT
-      		WRITE(111,111) I
+      TEST4=MOD(I,180)
+      IF (TEST4.EQ.0) THEN
+        CALL OUTPUT
+            WRITE(111,111) I
  111  		FORMAT(1X,I6)
-     	ENDIF
+      ENDIF
 C
-	  CALL INTGTR(NN,TIME,DELTAT,YY,YP)
+      CALL INTGTR(NN,TIME,DELTAT,YY,YP)
 C
- 	  CALL CONSHAND
+      CALL CONSHAND
 C
  1000 CONTINUE
-		PRINT *, 'Simulation is done. '
+      PRINT *, 'Simulation is done.'
 
 C
- 	CLOSE(UNIT=111)
-	CLOSE(UNIT=1111)
-	CLOSE(UNIT=1112)
-	CLOSE(UNIT=1113)
-	CLOSE(UNIT=2111)
-	CLOSE(UNIT=2112)
-	CLOSE(UNIT=2113)
-	CLOSE(UNIT=2114)
-	CLOSE(UNIT=2115)
-	CLOSE(UNIT=2116)
-	CLOSE(UNIT=2117)
-	CLOSE(UNIT=2118)
-	CLOSE(UNIT=2119)
-	CLOSE(UNIT=2120)
-  	CLOSE(UNIT=2121)
+      CLOSE(UNIT=111)
+      CLOSE(UNIT=1111)
+      CLOSE(UNIT=1112)
+      CLOSE(UNIT=1113)
+      CLOSE(UNIT=2111)
+      CLOSE(UNIT=2112)
+      CLOSE(UNIT=2113)
+      CLOSE(UNIT=2114)
+      CLOSE(UNIT=2115)
+      CLOSE(UNIT=2116)
+      CLOSE(UNIT=2117)
+      CLOSE(UNIT=2118)
+      CLOSE(UNIT=2119)
+      CLOSE(UNIT=2120)
+      CLOSE(UNIT=2121)
       STOP
 
 
@@ -539,7 +537,7 @@ C    Stripper Level Controller
 C
 C    Calculate Error
 C
-      ERR2 = (SETPT(2) - XMEAS(3)) * 100. / 8354. 
+      ERR2 = (SETPT(2) - XMEAS(3)) * 100. / 8354.
 C
 C    Proportional-Integral Controller (Velocity Form)
 C         GAIN = Controller Gain
@@ -671,9 +669,9 @@ C
 C 	PRINT *, 'GAIN5= ', GAIN5
 C	PRINT *, 'TAUI5= ', TAUI5
 C	PRINT *, 'ERR5= ', ERR5
-C	PRINT *, 'ERROLD5= ', ERROLD5     
+C	PRINT *, 'ERROLD5= ', ERROLD5
 C
-	DXMV = GAIN5 * ((ERR5 - ERROLD5)+ERR5*DELTAT*3./TAUI5)
+      DXMV = GAIN5 * ((ERR5 - ERROLD5)+ERR5*DELTAT*3./TAUI5)
 C
       XMV(5) = XMV(5) + DXMV
 C
@@ -693,8 +691,8 @@ C   MEASUREMENT AND VALVE COMMON BLOCK
 C
       DOUBLE PRECISION XMEAS, XMV
       COMMON/PV/ XMEAS(41), XMV(12)
-	INTEGER FLAG
-       COMMON/FLAG6/ FLAG
+      INTEGER FLAG
+      COMMON/FLAG6/ FLAG
 C
 C   CONTROLLER COMMON BLOCK
 C
@@ -707,28 +705,28 @@ C
 C
 C  Example PI Controller:
 C     Stripper Level Controller
-	IF (XMEAS(13).GE.2950.0) THEN
-		XMV(6)=100.0
-		FLAG=1
-	ELSEIF (FLAG.EQ.1.AND.XMEAS(13).GE.2633.7) THEN
-		XMV(6)=100.0
-	ELSEIF (FLAG.EQ.1.AND.XMEAS(13).LE.2633.7) THEN
-		XMV(6)=40.060
-		SETPT(6)=0.33712
-		ERROLD6=0.0
- 		FLAG=0
-	ELSEIF (XMEAS(13).LE.2300.) THEN
-		XMV(6)=0.0
-		FLAG=2
-	ELSEIF (FLAG.EQ.2.AND.XMEAS(13).LE.2633.7) THEN
-		XMV(6)=0.0
-	ELSEIF (FLAG.EQ.2.AND.XMEAS(13).GE.2633.7) THEN
-		XMV(6)=40.060
-		SETPT(6)=0.33712
-		ERROLD6=0.0
-		FLAG=0
-	ELSE	
-		FLAG=0
+      IF (XMEAS(13).GE.2950.0) THEN
+        XMV(6)=100.0
+        FLAG=1
+      ELSEIF (FLAG.EQ.1.AND.XMEAS(13).GE.2633.7) THEN
+        XMV(6)=100.0
+      ELSEIF (FLAG.EQ.1.AND.XMEAS(13).LE.2633.7) THEN
+        XMV(6)=40.060
+        SETPT(6)=0.33712
+        ERROLD6=0.0
+        FLAG=0
+      ELSEIF (XMEAS(13).LE.2300.) THEN
+        XMV(6)=0.0
+        FLAG=2
+      ELSEIF (FLAG.EQ.2.AND.XMEAS(13).LE.2633.7) THEN
+        XMV(6)=0.0
+      ELSEIF (FLAG.EQ.2.AND.XMEAS(13).GE.2633.7) THEN
+        XMV(6)=40.060
+        SETPT(6)=0.33712
+        ERROLD6=0.0
+        FLAG=0
+      ELSE
+        FLAG=0
 C
 C    Calculate Error
 C
@@ -742,11 +740,11 @@ C	PRINT *, 'XMV(6)= ', XMV(6)
       DXMV = GAIN6 * ( ( ERR6 - ERROLD6 ) )
 C
 C 	PRINT *, 'GAIN6= ', GAIN6
-C	PRINT *, 'SETPT(6)= ', SETPT(6)	
-C	PRINT *, 'XMEAS(10)= ', XMEAS(10)     
-	XMV(6) = XMV(6) + DXMV
+C	PRINT *, 'SETPT(6)= ', SETPT(6)
+C	PRINT *, 'XMEAS(10)= ', XMEAS(10)
+      XMV(6) = XMV(6) + DXMV
 C
-C 	PRINT *, 'ERROLD6= ', ERROLD6     
+C 	PRINT *, 'ERROLD6= ', ERROLD6
 C	PRINT *, 'ERR6= ', ERR6
 C	PRINT *, 'XMV(6)== ', XMV(6)
       ERROLD6 = ERR6
@@ -863,7 +861,7 @@ C    Stripper Level Controller
 C
 C    Calculate Error
 C
-      ERR9 = (SETPT(9) - XMEAS(19)) * 100. / 460. 
+      ERR9 = (SETPT(9) - XMEAS(19)) * 100. / 460.
 C
 C    Proportional-Integral Controller (Velocity Form)
 C         GAIN = Controller Gain
@@ -1191,7 +1189,7 @@ C    Stripper Level Controller
 C
 C    Calculate Error
 C
-      ERR18 = (SETPT(18) - XMEAS(9)) * 100. / 150. 
+      ERR18 = (SETPT(18) - XMEAS(9)) * 100. / 150.
 C
 C    Proportional-Integral Controller (Velocity Form)
 C         GAIN = Controller Gain
@@ -1267,7 +1265,7 @@ C
       COMMON/CTRLALL/ SETPT(20), DELTAT
       DOUBLE PRECISION GAIN20, TAUI20, ERROLD20
       COMMON/CTRL20/  GAIN20, TAUI20, ERROLD20
-C    
+C
       DOUBLE PRECISION ERR20, DXMV
 C
 C  Example PI Controller:
@@ -1308,7 +1306,7 @@ C
       COMMON/CTRLALL/ SETPT(20), DELTAT
       DOUBLE PRECISION GAIN22, TAUI22, ERROLD22
       COMMON/CTRL22/  GAIN22, TAUI22, ERROLD22
-C    
+C
       DOUBLE PRECISION ERR22, DXMV
 C
 C  Example PI Controller:
@@ -1379,7 +1377,7 @@ C
 C
       DO 100 I = 1, NN
 C
-          YY(I) = YY(I) + YP(I) * DELTAT 
+          YY(I) = YY(I) + YP(I) * DELTAT
 C
  100  CONTINUE
 C
@@ -1396,13 +1394,12 @@ C
       DOUBLE PRECISION XMEAS, XMV
       COMMON/PV/ XMEAS(41), XMV(12)
 C
-	INTEGER I
-C	
-	DO 100 I=1, 11
-		IF (XMV(I).LE.0.0) XMV(I)=0.
- 		IF (XMV(I).GE.100.0) XMV(I)=100.
+      INTEGER I
+C
+      DO 100 I=1, 11
+        IF (XMV(I).LE.0.0) XMV(I)=0.
+        IF (XMV(I).GE.100.0) XMV(I)=100.
  100    CONTINUE
 C
       RETURN
       END
-
