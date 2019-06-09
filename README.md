@@ -3,7 +3,7 @@
 This repository provides a Python interface to the original Fortran program of the Tennessee Eastman Process (TEP) Control Test Problem.
 
 In order to use it properly, you should build the fortran program from source using *f2py*.
-You may refer to the instructions below to build it yourself or, if you are in a linux system, you may try the file provided in this repository, which was compiled in a linux machine according to:
+You may refer to the instructions below to build it yourself or, if you are in a linux system, you may try the file provided in this repository, which was compiled on a linux machine according to:
 ```
 $ uname -srvmpio
 Linux 4.15.0-51-generic #55-Ubuntu SMP Wed May 15 14:27:21 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
