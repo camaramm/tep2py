@@ -195,6 +195,17 @@ C
 C=============================================================================
 C
 C
+      SUBROUTINE TEMAIN(NPTS, NX, IDATA, XDATA, VERBOSE)
+C ****************************************************************************
+*     COMPUTES THE 41 PROCESS MEASUREMENTS AND 11 MANIPULATED VARIABLES GIVEN
+*     THE DISTURBANCES TIME-SERIES MATRIX
+*     NPTS  = NUMBER OF DATA POINTS TO SIMULATE (1 MIN = 60 POINTS)
+*     NX    = NUMBER OF DATA POINTS COMPUTED (3 MIN = 1 POINT)
+*     IDATA = DISTURBANCES TIME-SERIES MATRIX (NX, 20)
+*     XDATA = PROCESS MEASUREMENTS AND MANIPULATED VARIABLES MATRIX (NX, 52)
+*     VERBOSE  = VERBOSE FLAG (0 = VERBOSE, 1 = NO VERBOSE)
+C ****************************************************************************
+C
 C  MEASUREMENT AND VALVE COMMON BLOCK
 C
       DOUBLE PRECISION XMEAS, XMV
