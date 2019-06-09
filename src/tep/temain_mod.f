@@ -525,8 +525,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL1
-C
-C  Discrete control algorithms
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR D FEED (STREAM 2)
+C **********************************************************************
 C
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
@@ -566,9 +567,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL2
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR E FEED (STREAM 3)
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -607,9 +608,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL3
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR A FEED (STREAM 1)
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -648,9 +649,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL4
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR A AND C FEED (STREAM 4)
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -689,9 +690,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL5
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR RECYCLE FLOW (STREAM 8)
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -735,9 +736,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL6
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR PROD SEP PRESSURE
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -808,9 +809,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL7
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR PRODUCT SEP LEVEL
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -849,9 +850,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL8
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR STRIPPER LEVEL
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -890,9 +891,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL9
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR STRIPPER STEAM FLOW
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -931,9 +932,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL10
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR REACTOR COOLING WATER OUTLET TEMP
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -972,9 +973,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL11
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR STRIPPER UNDERFLOW (STREAM 11)
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -1013,9 +1014,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL13
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR COMPONENT A (STREAM 6)
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -1054,9 +1055,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL14
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR COMPONENT D (STREAM 6)
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -1095,9 +1096,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL15
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR COMPONENT E (STREAM 6)
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -1136,9 +1137,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL16
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR STRIPPER TEMPERATURE
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -1177,9 +1178,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL17
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR REACTOR LEVEL
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -1218,9 +1219,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL18
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR REACTOR TEMPERATURE
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -1259,9 +1260,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL19
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR COMPONENT B (STREAM 9)
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -1302,9 +1303,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL20
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR COMPONENT E (STREAM 11)
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -1343,9 +1344,9 @@ C
 C=============================================================================
 C
       SUBROUTINE CONTRL22
-C
-C  Discrete control algorithms
-C
+C **********************************************************************
+C     COMPUTES DISCRETE CONTROL ALGORITHM FOR PROD SEP PRESSURE
+C **********************************************************************
 C
 C   MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -1415,9 +1416,10 @@ C
 C=============================================================================
 C
       SUBROUTINE INTGTR(NN,TIME,DELTAT,YY,YP)
-C
+C **********************************************************************
 C  Euler Integration Algorithm
-C
+C     COMPUTES EULER INTEGRATION ALGORITHM
+C **********************************************************************
 C
       INTEGER I, NN
 C
@@ -1439,9 +1441,10 @@ C
 C=============================================================================
 C
       SUBROUTINE CONSHAND
-C
+C **********************************************************************
 C  Euler Integration Algorithm
-C
+C     ENSURES XMV(I) BETWEEN 0-100% RANGE
+C **********************************************************************
 C
       DOUBLE PRECISION XMEAS, XMV
       COMMON/PV/ XMEAS(41), XMV(12)
