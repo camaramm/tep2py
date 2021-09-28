@@ -3,7 +3,7 @@
 This repository provides a Python interface to a modified Fortran program of the Tennessee Eastman Process (TEP) Control Test Problem provided by [gmxavier](https://github.com/gmxavier/TEP-meets-LSTM).
 Users of this modified version should cite it as:
 
-> G.M. Xavier and J.M. Seixas, "Fault Detection and Diagnosis in a chemical Process using Long Short-Term Memory Recurrent Neural Network". In Proceedings 31st International Joint Conference on Neural Networks (IJCNN), (Rio de Janeiro, Brazil), IEEE, IEEE, July 2018. 8 pages, to appear
+> G. M. Xavier and J. M. de Seixas, "Fault Detection and Diagnosis in a Chemical Process using Long Short-Term Memory Recurrent Neural Network", 2018 International Joint Conference on Neural Networks (IJCNN), 2018, pp. 1-8, doi: 10.1109/IJCNN.2018.8489385.
 
 In order to use it properly, you should build the fortran program from source using *f2py*.
 You may refer to the instructions below to build it yourself or, if you are on a linux system, you may try the file provided in this repository, which was compiled on a linux machine according to:
